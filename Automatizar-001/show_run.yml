@@ -1,0 +1,14 @@
+- name: show run
+  connection: network_cli
+  gather_facts: false
+  hosts: all
+  tasks:
+     - name: show run
+       ios_command:
+         commands:
+           - show run
+       register: config
+     - name: guardar salida show run
+       copy:
+         content: "{{ config.stdout[0] }}"
+         dest: "/etc/ansible/show/show_run_{{ inventory_hostname }}.txt"
