@@ -1,0 +1,17 @@
+- name: Playbook con Banner
+  connection: network_cli
+  gather_facts: true
+  hosts: all
+  tasks:
+        - name: configurando Banner Motd
+        ios_banner:
+          banner: motd
+          text: |
+           Bienvenidos a la sede de {{ inventory_hostname }}
+          state: present
+
+        - name:  configurando Banner Login
+          ios_banner: login
+          text: |
+           !Solo personal autorizado!
+          state: present
